@@ -5,7 +5,8 @@
 \usepackage[utf8]{inputenc}
 %\usepackage{graphicx}
 %\usepackage{hyperref}
- 
+\usetheme{Madrid}
+\usefonttheme[onlymath]{serif}
 \usepackage{amssymb,amsfonts,amsmath,amsthm}
 \usepackage{mathtools}
 \usepackage{latexsym}
@@ -52,10 +53,12 @@ style=abnt, noerroretextools=true
  \usepackage{autonum}
  \let\forlistloop\etoolboxforlistloop % restore the good meaning of \forlistloop
  
- \title{Análise Teórica de Máquinas de Vetores Suporte} 
- \author{Aluna: Paula Cristina Rohr Ertel \\ Orientador: Luiz Rafael dos Santos \\ Universidade Federal de Santa Catarina - Campus Blumenau}
- \date{\today}
- 
+ \title[Análise Teórica de SVM]{Análise Teórica de Máquinas de Vetores Suporte}
+ \subtitle{Qualificação de TCC} 
+ \author[Paula Ertel]{Aluna: Paula Cristina Rohr Ertel \\ Orientador: Luiz Rafael dos Santos}
+ \institute[UFSC]{Universidade Federal de Santa Catarina - Campus Blumenau}
+ \date{29 de Novembro de 2019}
+ \logo{\includegraphics[width=0.1\textwidth]{UFSC.pdf}}
 \begin{document}
 
 \begin{frame}
@@ -76,7 +79,7 @@ style=abnt, noerroretextools=true
 \end{frame}
 
 %Slide 2
-\begin{frame}{Objetivo}
+\begin{frame}
 \begin{itemize}
 	\item O objetivo deste trabalho será desenvolver um estudo teórico de uma técnica supervisionada: as \textbf{Máquinas de Vetores Suporte} (SVM, do inglês \textit{Support Vector Machine}).
 
@@ -84,11 +87,11 @@ style=abnt, noerroretextools=true
 	
 	\item As SVM são indicadas nos casos em que ocorrem baixa amostragem, altos níveis de ruídos nos dados e dados de elevada dimensão (muitas entradas).
 	
-	\item SVM aplicada ao problema de classificação.
+	%\item SVM aplicada ao problema de classificação.
 	
-	\item "Quando o aprendizado supervisionado é aplicado ao problema de classificação, as 
+	%\item ``Quando o aprendizado supervisionado é aplicado ao problema de classificação, as 
 	amostras de treinamento são formadas pelo conjunto de dados de entrada associados 
-	às suas correspondentes respostas pré-classificadas (rótulos ou dados de saída). " 
+	às suas correspondentes respostas pré-classificadas (rótulos ou dados de saída).''
 \end{itemize}
 \end{frame}
 
