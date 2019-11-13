@@ -1,9 +1,8 @@
-\documentclass[12pt]{beamer}
+\documentclass{beamer}
 % foi retirada a opção -synctex=1
 \usepackage[brazil]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[onehalfspacing]{setspace}
 %\usepackage{graphicx}
 %\usepackage{hyperref}
  
@@ -13,7 +12,6 @@
 \usepackage[brazilian]{cleveref}
 
 \usepackage{float}
-\usepackage[table]{xcolor}
 \usepackage{indentfirst}
 \usepackage{dsfont}
 \usepackage{caption}
@@ -122,11 +120,11 @@ Considere um conjunto de dados, pertencentes a duas classes distintas, conforme 
 
 %Slide 4
 
-\begin{frame}
+\begin{frame}{Sem título}
 A modelagem do problema de classificação, por meio de SVM, envolve um problema de programação não linear, quadrático, convexo e restrito, no qual o objetivo é encontrar um hiperplano ótimo $(w^{*})^{T}x+b^{*}=0$ que separe os dados de entrada $x^{i}$ em duas classes de saída $y_{i}$. Assim, pretendemos estudar primeiramente o caso de classificação com margem rígida e posteriormente sua generalização para o caso com margem flexível. Por fim, abordaremos o problema de classificação não linear. 
 \end{frame}
 
-Slide 5
+% Slide 5
 \begin{frame}{Formulação Matemática do Problema de Classificação}
 
 Considere os conjuntos de entrada $\Xset =\{x^1, \ldots , x^m \} \subset \RR^n$ e de treinamento $\Yset=\{(x^1, y_1), \ldots , (x^m, y_m)\mid x^i \in \Xset \, e \, y_i \in \{-1,1\}\}$, com a partição 
@@ -212,7 +210,7 @@ A partir deste Lema temos que $\Hset^{+}:=\{x\in \RR^n \mid w^{T}x+b\geq 1\}$ e 
 \begin{frame}
 Utilizando a \Cref{prop1} podemos demonstrar o Lema seguinte, o qual estabelece a largura da faixa entre os hiperplanos separadores $\Hset^{+}$ e $\Hset^{-}$.
 
-\begin{lema} A distância entre os hiperplanos $\Hset^{+}$ e $\Hset^{-}$ é dada por d=\dfrac{2}{\Vert w\Vert}$.$
+\begin{lema} A distância entre os hiperplanos $\Hset^{+}$ e $\Hset^{-}$ é dada por $d=\dfrac{2}{\Vert w\Vert}.$
 \end{lema}
 \end{frame}
 
