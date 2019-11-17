@@ -89,7 +89,7 @@ style=abnt, noerroretextools=true
 	
 	%\item SVM aplicada ao problema de classificação.
 	
-	%\item ``Quando o aprendizado supervisionado é aplicado ao problema de classificação, as 
+	\item ``Quando o aprendizado supervisionado é aplicado ao problema de classificação, as 
 	amostras de treinamento são formadas pelo conjunto de dados de entrada associados 
 	às suas correspondentes respostas pré-classificadas (rótulos ou dados de saída).''
 \end{itemize}
@@ -123,7 +123,7 @@ Considere um conjunto de dados, pertencentes a duas classes distintas, conforme 
 
 %Slide 4
 
-\begin{frame}{Sem título}
+\begin{frame}
 A modelagem do problema de classificação, por meio de SVM, envolve um problema de programação não linear, quadrático, convexo e restrito, no qual o objetivo é encontrar um hiperplano ótimo $(w^{*})^{T}x+b^{*}=0$ que separe os dados de entrada $x^{i}$ em duas classes de saída $y_{i}$. Assim, pretendemos estudar primeiramente o caso de classificação com margem rígida e posteriormente sua generalização para o caso com margem flexível. Por fim, abordaremos o problema de classificação não linear. 
 \end{frame}
 
@@ -180,7 +180,7 @@ O hiperplano $\Hset(w,b)$ divide o espaço $\RR^n$ em dois semiespaços, dados p
 \end{figure}
 \end{frame}
 
-%Slide 7
+
 \begin{frame}
 \begin{defi} \label{def1} Dizemos que os conjuntos $\Xset^{+}, \Xset^{-} \subset \RR^n$ são linearmente separáveis quando existem $w\in \RR^n$ e $b\in \RR$  tais que $w^{T}x+b>0$ para todo $x\in \Xset^{+}$ e $w^{T}x+b<0$ para todo $x\in \Xset^{-}$. O hiperplano $\Hset(w,b)$ é chamado hiperplano separador dos conjuntos $\Xset^{+}$ e $\Xset^{-}$.
 \end{defi}
@@ -197,7 +197,6 @@ O hiperplano $\Hset(w,b)$ divide o espaço $\RR^n$ em dois semiespaços, dados p
 \end{lema} 
 \end{frame}
 
-%Slide 8
 
 \begin{frame}
 A partir deste Lema temos que $\Hset^{+}:=\{x\in \RR^n \mid w^{T}x+b\geq 1\}$ e $\Hset^{-}:=\{x\in \RR^n \mid w^{T}x+b\leq -1\}$ são os hiperplanos que definem a faixa que separa os conjuntos $\Xset^{+}$ e $\Xset^{-}$.
@@ -208,7 +207,6 @@ A partir deste Lema temos que $\Hset^{+}:=\{x\in \RR^n \mid w^{T}x+b\geq 1\}$ e 
 \end{prop}
 \end{frame}
 
-%Slide 9
 
 \begin{frame}
 Utilizando a \Cref{prop1} podemos demonstrar o Lema seguinte, o qual estabelece a largura da faixa entre os hiperplanos separadores $\Hset^{+}$ e $\Hset^{-}$.
@@ -217,7 +215,6 @@ Utilizando a \Cref{prop1} podemos demonstrar o Lema seguinte, o qual estabelece 
 \end{lema}
 \end{frame}
 
-%Slide 10
 
 \begin{frame}
 Portanto, encontrar o hiperplano que melhor separa os dados implica maximizar a largura da margem, isto é, maximizar $d=\dfrac{2}{\Vert w\Vert }$. Isso equivale a minimizar seu inverso $\dfrac{1}{2}\Vert w\Vert $ ou ainda minimizar $\dfrac{1}{2}\Vert w\Vert^{2}$.
@@ -232,7 +229,6 @@ Considerando que $\Xset^{+}=\{x^i \in \Xset\mid y_i=1\}$ e $\Xset^{-}=\{x^i \in 
 \[ y_{i}(w^{T}x^{i}+b)\geq 1, \quad i=1, \ldots ,m. \]
 \end{frame}
 
-%Slide 11
 
 \begin{frame}
 Portanto, o problema de encontrar o hiperplano ótimo pode ser formulado da seguinte maneira
@@ -244,13 +240,12 @@ Portanto, o problema de encontrar o hiperplano ótimo pode ser formulado da segu
 onde $w\in \RR^{n}$ e $b\in \RR$. 
 \end{frame}
 
-%Slide 12
 
 \begin{frame}{Projetos Futuros}
 Para resolver o problema proposto é preciso estudar a teoria de otimização com restrições e a teoria de dualidade, em particular a relacionada ao problema de programação quadrática com restrições lineares. Até o momento já foi realizada uma revisão dos principais conceitos da Álgebra Linear e do Cálculo de várias variáveis relacionados com o assunto, assim como, o estudo teórico das condições de otimalidade para problemas de otimização restrita. Portanto, para dar continuidade ao projeto pretende-se avançar o estudo para os problemas de otimização irrestrita, e sobre as teorias de dualidade e programação quadrática. Por fim, pretendemos realizar uma pequena implementação computacional da técnica de Máquinas de Vetores Suporte a um problema de classificação. Para tanto, utilizaremos a linguagem de programação \texttt{Julia}, sobre a qual também será preciso estudar e se aperfeiçoar.
 \end{frame}
 
-%Slide 13
+
 \begin{frame}
 \printbibliography
 \end{frame}
