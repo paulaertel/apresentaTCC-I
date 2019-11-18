@@ -68,11 +68,17 @@ style=numeric-comp, noerroretextools=true
 
 \begin{frame}{Aprendizagem de Máquina}
 \begin{itemize}
-	\item Motivação.
+	%\item Motivação: Iniciar a apresentação comentando de como surgiu a ideia do tema para o TCC.
 	\item A \textbf{Aprendizagem de Máquina} (do inglês \textit{Machine Learning}) é o estudo do uso de técnicas computacionais para automaticamente detectar padrões em dados e usá-los para fazer predições e tomar decisões.
 	\begin{itemize}
 		\item Aprendizagem Supervisionada.
 		\item Aprendizagem não Supervisionada.	
+	\end{itemize}
+	\item Algumas aplicações da Aprendizagem de Máquina são:
+	\begin{itemize} %site de referência https://www.sas.com/pt_br/insights/analytics/machine-learning.html
+		\item Carros autônomos do Google.
+		\item Recomendação de ofertas com base nas compras anteriores.
+		\item Detecção de fraudes.
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -84,7 +90,8 @@ style=numeric-comp, noerroretextools=true
 
 	\item Segundo \textcite{Evelin2017}, essa técnica foi desenvolvida por Vladimir Vapnik, Bernhard Boser, Isabelle Guyon e Corrina Cortes, com fundamentos provenientes da Teoria de Aprendizagem Estatística.
 	
-	\item As SVM são indicadas nos casos em que ocorrem dados de dimensões elevadas e com altos níveis de ruídos, além de apresentar uma boa capacidade de generalização.
+	\item Algumas aplicações de SVM em problemas práticos são o reconhecimento facial, leitura de placas automotivas e detecção de spam.
+	%\item As SVM são indicadas nos casos em que ocorrem dados de dimensões elevadas e com altos níveis de ruídos, além de apresentar uma boa capacidade de generalização.
 
 \end{itemize}
 \end{frame}
@@ -142,13 +149,13 @@ Considere um conjunto de dados, pertencentes a duas classes distintas, conforme 
 		\centering
 		\includegraphics[width=\textwidth]{letraB.png}
 	\end{subfigure}
-	\caption{Transformação de caractere em vetor. \\ Fonte: \textcite{Evelin2017}}
+	\caption{Classificação de caracteres. \\ Fonte: \textcite{Evelin2017}}
 \end{figure}
 \end{frame}
 
 
 \begin{frame}
-O problema de classificação trata-se de um problema e programação quadrática convexa com restrições lineares, que pode ser formulado como
+O problema de classificação trata-se de um problema de programação quadrática convexa com restrições lineares, que pode ser formulado como
 \[
 \begin{aligned}
 \min_{w,b} & \quad f(w,b) \\
@@ -216,7 +223,7 @@ dos conjuntos formados pelos atributos pertencentes às classes positiva e negat
 
 
 \begin{frame}
-\begin{lema} Suponha que os conjuntos $\Xset^{+}, \Xset^{-} \subset \RR^n$ são finitos e linearmente separáveis, com hiperplano separador $\Hset(w,b)$. Então, existem $\overline{w}\in \RR^n$ e $\overline{b}\in \RR$ tais que $\Hset(w,b)$ pode ser descrito por
+\begin{lema} \label{lema1} Suponha que os conjuntos $\Xset^{+}, \Xset^{-} \subset \RR^n$ são finitos e linearmente separáveis, com hiperplano separador $\Hset(w,b)$. Então, existem $\overline{w}\in \RR^n$ e $\overline{b}\in \RR$ tais que $\Hset(w,b)$ pode ser descrito por
 	\[
 	\wbar^{T}x+\bbar =0,
 	\]
@@ -230,7 +237,7 @@ dos conjuntos formados pelos atributos pertencentes às classes positiva e negat
 
 
 \begin{frame}
-Pelo Lema anterior $\Hset^{+}:=\{x\in \RR^n \mid w^{T}x+b\geq 1\}$ e $\Hset^{-}:=\{x\in \RR^n \mid w^{T}x+b\leq -1\}$ são os hiperplanos que definem a faixa que separa os conjuntos $\Xset^{+}$ e $\Xset^{-}$.
+Pelo \Cref{lema1} tem-se que $\Hset^{+}:=\{x\in \RR^n \mid w^{T}x+b= 1\}$ e $\Hset^{-}:=\{x\in \RR^n \mid w^{T}x+b= -1\}$ são os hiperplanos que definem a faixa que separa os conjuntos $\Xset^{+}$ e $\Xset^{-}$.
 
 \begin{prop} \label{prop1} A projeção ortogonal de um vetor $\xbar\in \RR^n$ sobre um hiperplano afim $\Hset(w,b)$, é dada por
 	\[ \proj_{\Hset}(\xbar)= \xbar - \dfrac{w^{T}\xbar+b}{w^{T}w}w. \]
@@ -240,9 +247,9 @@ Pelo Lema anterior $\Hset^{+}:=\{x\in \RR^n \mid w^{T}x+b\geq 1\}$ e $\Hset^{-}:
 
 
 \begin{frame}
-Este Lema estabelece a largura da faixa entre os hiperplanos separadores $\Hset^{+}$ e $\Hset^{-}$.
+O \Cref{lema2} estabelece a largura da faixa entre os hiperplanos separadores $\Hset^{+}$ e $\Hset^{-}$.
 
-\begin{lema} A distância entre os hiperplanos $\Hset^{+}$ e $\Hset^{-}$ é dada por $d=\dfrac{2}{\Vert w\Vert}.$
+\begin{lema}\label{lema2} A distância entre os hiperplanos $\Hset^{+}$ e $\Hset^{-}$ é dada por $d=\dfrac{2}{\Vert w\Vert}.$
 \end{lema}
 \end{frame}
 
@@ -250,7 +257,7 @@ Este Lema estabelece a largura da faixa entre os hiperplanos separadores $\Hset^
 \begin{frame}
 Para encontrar o hiperplano que melhor separa os dados é preciso maximizar $d=\dfrac{2}{\Vert w\Vert }$, ou equivalentemente, minimizar $\dfrac{1}{2}\Vert w\Vert^{2}$. 
 
-Ademais, como a faixa deve separar os dados das duas classes, as seguintes restrições devem ser satisfeitas
+Como a faixa deve separar os dados das duas classes, as seguintes restrições devem ser satisfeitas
 \begin{align}
 w^{T}x+b &\geq 1 , \text{ para  todo } x\in \Xset^{+}, \\
 w^{T}x+b &\leq -1 , \text{ para  todo } x\in \Xset^{-}.
