@@ -45,7 +45,7 @@
 \usepackage{csquotes}
 \usepackage[
 backend=biber,
-style=abnt, noerroretextools=true
+style=numeric-comp, noerroretextools=true
 ]{biblatex}
 \addbibresource{referencias.bib}
 
@@ -66,39 +66,44 @@ style=abnt, noerroretextools=true
 \end{frame}
 
 
-\begin{frame}{Introdução}
-%Slide 1
+\begin{frame}{Aprendizagem de Máquina}
 \begin{itemize}
-	\item Motivação;
+	\item Motivação.
 	\item A \textbf{Aprendizagem de Máquina} (do inglês \textit{Machine Learning}) é o estudo do uso de técnicas computacionais para automaticamente detectar padrões em dados e usá-los para fazer predições e tomar decisões.
 	\begin{itemize}
-		\item Aprendizagem Supervisionada;
+		\item Aprendizagem Supervisionada.
 		\item Aprendizagem não Supervisionada.	
 	\end{itemize}
 \end{itemize}
 \end{frame}
 
-%Slide 2
-\begin{frame}
+
+\begin{frame}{Máquinas de Vetores Suporte}
 \begin{itemize}
-	\item O objetivo deste trabalho será desenvolver um estudo teórico de uma técnica supervisionada: as \textbf{Máquinas de Vetores Suporte} (SVM, do inglês \textit{Support Vector Machine}).
+	\item As \textbf{Máquinas de Vetores Suporte} (SVM, do inglês \textit{Support Vector Machine}) são uma técnica para aprendizagem supervisionada.
 
 	\item Segundo \textcite{Evelin2017}, essa técnica foi desenvolvida por Vladimir Vapnik, Bernhard Boser, Isabelle Guyon e Corrina Cortes, com fundamentos provenientes da Teoria de Aprendizagem Estatística.
 	
-	\item As SVM são indicadas nos casos em que ocorrem baixa amostragem, altos níveis de ruídos nos dados e dados de elevada dimensão (muitas entradas).
-	
-	%\item SVM aplicada ao problema de classificação.
-	
-	\item ``Quando o aprendizado supervisionado é aplicado ao problema de classificação, as 
-	amostras de treinamento são formadas pelo conjunto de dados de entrada associados 
-	às suas correspondentes respostas pré-classificadas (rótulos ou dados de saída).''
+	\item As SVM são indicadas nos casos em que ocorrem dados de dimensões elevadas e com altos níveis de ruídos, além de apresentar uma boa capacidade de generalização.
+
 \end{itemize}
 \end{frame}
 
-%Slide 3
-\begin{frame}{Introdução ao Problema de Classificação}
 
-Considere um conjunto de dados, pertencentes a duas classes distintas, conforme \Cref{fig1} a seguir.
+\begin{frame}{Objetivo}
+\begin{itemize}
+	\item Estudar aspectos teóricos-matemáticos dos Métodos de Otimização relacionadas a Aprendizagem de Máquina \cite{Ana1994}, \cite{Solodov2014}, \cite{Izmailov2014}, \cite{Ademir2013}.
+
+	\item Desenvolver um estudo teórico das Máquinas de Vetores Suporte \cite{Faisal2019}, \cite{Evelin2017}.
+
+	\item Realizar uma implementação computacional da técnica de Máquinas de Vetores Suporte utilizando a linguagem de programação  \texttt{Julia}.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{SVM aplicada ao Problema de Classificação}
+
+Considere um conjunto de dados, pertencentes a duas classes distintas, conforme \Cref{fig1}.
 
 \begin{figure}[!h] 
 	\centering
@@ -121,15 +126,40 @@ Considere um conjunto de dados, pertencentes a duas classes distintas, conforme 
 \end{figure}
 \end{frame}
 
-%Slide 4
 
-\begin{frame}
-A modelagem do problema de classificação, por meio de SVM, envolve um problema de programação não linear, quadrático, convexo e restrito, no qual o objetivo é encontrar um hiperplano ótimo $(w^{*})^{T}x+b^{*}=0$ que separe os dados de entrada $x^{i}$ em duas classes de saída $y_{i}$. Assim, pretendemos estudar primeiramente o caso de classificação com margem rígida e posteriormente sua generalização para o caso com margem flexível. Por fim, abordaremos o problema de classificação não linear. 
+\begin{frame}{Uma Aplicação Prática}
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[h]{0.8\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{letraA_1.png}
+	\end{subfigure}
+	\begin{subfigure}[!h]{0.8\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{letraA_2.png}
+	\end{subfigure}
+	\begin{subfigure}[!h]{0.8\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{letraB.png}
+	\end{subfigure}
+	\caption{Transformação de caractere em vetor. \\ Fonte: \textcite{Evelin2017}}
+\end{figure}
 \end{frame}
 
-% Slide 5
-\begin{frame}{Formulação Matemática do Problema de Classificação}
 
+\begin{frame}
+O problema de classificação trata-se de um problema e programação quadrática convexa com restrições lineares, que pode ser formulado como
+\[
+\begin{aligned}
+\min_{w,b} & \quad f(w,b) \\
+\text{s.a.} &  \quad g(w,b) \leq 0, \end{aligned}
+\]
+com $w\in \RR^n$ e $b\in \RR $, em que $f: \RR^n \rightarrow \RR$ é uma função quadrática e $g: \RR^{n+1} \rightarrow \RR^m$ é linear.
+
+\end{frame}
+
+
+\begin{frame}{Formulação Matemática do Problema de Classificação}
 Considere os conjuntos de entrada $\Xset =\{x^1, \ldots , x^m \} \subset \RR^n$ e de treinamento $\Yset=\{(x^1, y_1), \ldots , (x^m, y_m)\mid x^i \in \Xset \, e \, y_i \in \{-1,1\}\}$, com a partição 
 \[ \label{conj1}
 \Xset ^{+} =\{x^i \in \Xset\mid y_i=1\} \quad e \quad \Xset^{-}=\{x^i \in \Xset\mid y_i=-1\},
@@ -138,15 +168,9 @@ dos conjuntos formados pelos atributos pertencentes às classes positiva e negat
 
 \begin{defi} Considere um vetor não nulo $w\in \RR^n$ e um escalar $b\in \RR$. Um hiperplano com vetor normal $w$ e constante $b$ é um conjunto da forma $\Hset(w,b)=\{x\in \RR^n \mid w^{T}x+b=0\}$.
 \end{defi}
-
-O hiperplano $\Hset(w,b)$ divide o espaço $\RR^n$ em dois semiespaços, dados por
-\[ \label{conj2}
-\mathcal{S}^{+}=\{x\in \RR^n \mid w^{T}x+b\geq 0\} \quad e \quad \mathcal{S}^{-}=\{x\in \RR^n \mid w^{T}x+b\leq 0\}.
-\]
-
 \end{frame}
 
-%Slide 6 (talvez seja preciso colocar em dois slides)
+
 \begin{frame}
 \begin{figure}[h] 
 	\centering
@@ -163,6 +187,10 @@ O hiperplano $\Hset(w,b)$ divide o espaço $\RR^n$ em dois semiespaços, dados p
 	\caption{Conjunto de Dados e Hiperplanos. \label{fig2}
 		\\ Fonte: \textcite{Evelin2017}}
 \end{figure}
+\end{frame}
+
+
+\begin{frame}
 \begin{figure}[h] 
 	\centering
 	\begin{subfigure}[h]{0.4\textwidth}
@@ -181,10 +209,13 @@ O hiperplano $\Hset(w,b)$ divide o espaço $\RR^n$ em dois semiespaços, dados p
 \end{frame}
 
 
-\begin{frame}
-\begin{defi} \label{def1} Dizemos que os conjuntos $\Xset^{+}, \Xset^{-} \subset \RR^n$ são linearmente separáveis quando existem $w\in \RR^n$ e $b\in \RR$  tais que $w^{T}x+b>0$ para todo $x\in \Xset^{+}$ e $w^{T}x+b<0$ para todo $x\in \Xset^{-}$. O hiperplano $\Hset(w,b)$ é chamado hiperplano separador dos conjuntos $\Xset^{+}$ e $\Xset^{-}$.
+\begin{frame}{Conjuntos Linearmente Separáveis}
+\begin{defi} \label{def1} Os conjuntos $\Xset^{+}, \Xset^{-} \subset \RR^n$ são ditos linearmente separáveis quando existem $w\in \RR^n$ e $b\in \RR$  tais que $w^{T}x+b>0$ para todo $x\in \Xset^{+}$ e $w^{T}x+b<0$ para todo $x\in \Xset^{-}$. O hiperplano $\Hset(w,b)$ é chamado hiperplano separador dos conjuntos $\Xset^{+}$ e $\Xset^{-}$.
 \end{defi}
+\end{frame}
 
+
+\begin{frame}
 \begin{lema} Suponha que os conjuntos $\Xset^{+}, \Xset^{-} \subset \RR^n$ são finitos e linearmente separáveis, com hiperplano separador $\Hset(w,b)$. Então, existem $\overline{w}\in \RR^n$ e $\overline{b}\in \RR$ tais que $\Hset(w,b)$ pode ser descrito por
 	\[
 	\wbar^{T}x+\bbar =0,
@@ -199,7 +230,7 @@ O hiperplano $\Hset(w,b)$ divide o espaço $\RR^n$ em dois semiespaços, dados p
 
 
 \begin{frame}
-A partir deste Lema temos que $\Hset^{+}:=\{x\in \RR^n \mid w^{T}x+b\geq 1\}$ e $\Hset^{-}:=\{x\in \RR^n \mid w^{T}x+b\leq -1\}$ são os hiperplanos que definem a faixa que separa os conjuntos $\Xset^{+}$ e $\Xset^{-}$.
+Pelo Lema anterior $\Hset^{+}:=\{x\in \RR^n \mid w^{T}x+b\geq 1\}$ e $\Hset^{-}:=\{x\in \RR^n \mid w^{T}x+b\leq -1\}$ são os hiperplanos que definem a faixa que separa os conjuntos $\Xset^{+}$ e $\Xset^{-}$.
 
 \begin{prop} \label{prop1} A projeção ortogonal de um vetor $\xbar\in \RR^n$ sobre um hiperplano afim $\Hset(w,b)$, é dada por
 	\[ \proj_{\Hset}(\xbar)= \xbar - \dfrac{w^{T}\xbar+b}{w^{T}w}w. \]
@@ -209,7 +240,7 @@ A partir deste Lema temos que $\Hset^{+}:=\{x\in \RR^n \mid w^{T}x+b\geq 1\}$ e 
 
 
 \begin{frame}
-Utilizando a \Cref{prop1} podemos demonstrar o Lema seguinte, o qual estabelece a largura da faixa entre os hiperplanos separadores $\Hset^{+}$ e $\Hset^{-}$.
+Este Lema estabelece a largura da faixa entre os hiperplanos separadores $\Hset^{+}$ e $\Hset^{-}$.
 
 \begin{lema} A distância entre os hiperplanos $\Hset^{+}$ e $\Hset^{-}$ é dada por $d=\dfrac{2}{\Vert w\Vert}.$
 \end{lema}
@@ -217,7 +248,7 @@ Utilizando a \Cref{prop1} podemos demonstrar o Lema seguinte, o qual estabelece 
 
 
 \begin{frame}
-Portanto, encontrar o hiperplano que melhor separa os dados implica maximizar a largura da margem, isto é, maximizar $d=\dfrac{2}{\Vert w\Vert }$. Isso equivale a minimizar seu inverso $\dfrac{1}{2}\Vert w\Vert $ ou ainda minimizar $\dfrac{1}{2}\Vert w\Vert^{2}$.
+Para encontrar o hiperplano que melhor separa os dados é preciso maximizar $d=\dfrac{2}{\Vert w\Vert }$, ou equivalentemente, minimizar $\dfrac{1}{2}\Vert w\Vert^{2}$. 
 
 Ademais, como a faixa deve separar os dados das duas classes, as seguintes restrições devem ser satisfeitas
 \begin{align}
@@ -225,7 +256,7 @@ w^{T}x+b &\geq 1 , \text{ para  todo } x\in \Xset^{+}, \\
 w^{T}x+b &\leq -1 , \text{ para  todo } x\in \Xset^{-}.
 \end{align}
 
-Considerando que $\Xset^{+}=\{x^i \in \Xset\mid y_i=1\}$ e $\Xset^{-}=\{x^i \in \Xset \mid y_i=-1\}$, podemos reescrever as restrições acima de uma forma mais compacta 
+Reescrevendo as restrições acima de uma forma mais compacta temos
 \[ y_{i}(w^{T}x^{i}+b)\geq 1, \quad i=1, \ldots ,m. \]
 \end{frame}
 
@@ -242,13 +273,24 @@ onde $w\in \RR^{n}$ e $b\in \RR$.
 
 
 \begin{frame}{Projetos Futuros}
-Para resolver o problema proposto é preciso estudar a teoria de otimização com restrições e a teoria de dualidade, em particular a relacionada ao problema de programação quadrática com restrições lineares. Até o momento já foi realizada uma revisão dos principais conceitos da Álgebra Linear e do Cálculo de várias variáveis relacionados com o assunto, assim como, o estudo teórico das condições de otimalidade para problemas de otimização restrita. Portanto, para dar continuidade ao projeto pretende-se avançar o estudo para os problemas de otimização irrestrita, e sobre as teorias de dualidade e programação quadrática. Por fim, pretendemos realizar uma pequena implementação computacional da técnica de Máquinas de Vetores Suporte a um problema de classificação. Para tanto, utilizaremos a linguagem de programação \texttt{Julia}, sobre a qual também será preciso estudar e se aperfeiçoar.
+\begin{itemize}
+	\item Estudar as condições de otimalidade para problemas com restrições.
+
+	\item Estudar a teoria de dualidade, em particular a relacionada ao problema de programação quadrática.
+
+	\item Realizar uma implementação computacional da técnica de Máquinas de Vetores Suporte a um problema de classificação utilizando a linguagem de programação \texttt{Julia}.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\centering
+\Large{Obrigada pela atenção!}
 \end{frame}
 
 
 \begin{frame}
 \printbibliography
 \end{frame}
-
 
 \end{document}
