@@ -53,7 +53,7 @@ style=numeric-comp, noerroretextools=true
  \usepackage{autonum}
  \let\forlistloop\etoolboxforlistloop % restore the good meaning of \forlistloop
  
- \title[Análise Teórica de SVM]{Análise Teórica de Máquinas de Vetores Suporte}
+ \title[Métodos de Otimização e SVM]{Métodos de Otimização e Máquinas de Vetores Suporte}
  \subtitle{Qualificação de TCC} 
  \author[Paula Ertel]{Aluna: Paula Cristina Rohr Ertel \\ Orientador: Luiz Rafael dos Santos}
  \institute[UFSC]{Universidade Federal de Santa Catarina - Campus Blumenau}
@@ -67,74 +67,36 @@ style=numeric-comp, noerroretextools=true
 
 
 \begin{frame}{Aprendizagem de Máquina}
-\begin{itemize}
-	%\item Motivação: Iniciar a apresentação comentando de como surgiu a ideia do tema para o TCC.
-	\item A \textbf{Aprendizagem de Máquina} (do inglês \textit{Machine Learning}) é o estudo do uso de técnicas computacionais para automaticamente detectar padrões em dados e usá-los para fazer predições e tomar decisões.
+A \textbf{Aprendizagem de Máquina} (do inglês \textit{Machine Learning}) é o estudo do uso de técnicas computacionais para automaticamente detectar padrões em dados e usá-los para fazer predições e tomar decisões.
 	\begin{itemize}
 		\item Aprendizagem Supervisionada.
 		\item Aprendizagem não Supervisionada.	
 	\end{itemize}
-	\item Algumas aplicações da Aprendizagem de Máquina são:
+\begin{block}{Aplicações da Aprendizagem de Máquina}
 	\begin{itemize} %site de referência https://www.sas.com/pt_br/insights/analytics/machine-learning.html
 		\item Carros autônomos do Google.
 		\item Recomendação de ofertas com base nas compras anteriores.
 		\item Detecção de fraudes.
 	\end{itemize}
-\end{itemize}
+\end{block}
 \end{frame}
 
 
 \begin{frame}{Máquinas de Vetores Suporte}
-\begin{itemize}
-	\item As \textbf{Máquinas de Vetores Suporte} (SVM, do inglês \textit{Support Vector Machine}) são uma técnica para aprendizagem supervisionada.
+As \textbf{Máquinas de Vetores Suporte} (SVM, do inglês \textit{Support Vector Machine}) são uma técnica para aprendizagem supervisionada.
 
-	\item Segundo \textcite{Evelin2017}, essa técnica foi desenvolvida por Vladimir Vapnik, Bernhard Boser, Isabelle Guyon e Corrina Cortes, com fundamentos provenientes da Teoria de Aprendizagem Estatística.
-	
-	\item Algumas aplicações de SVM em problemas práticos são o reconhecimento facial, leitura de placas automotivas e detecção de spam.
-	%\item As SVM são indicadas nos casos em que ocorrem dados de dimensões elevadas e com altos níveis de ruídos, além de apresentar uma boa capacidade de generalização.
-
-\end{itemize}
+Essa técnica foi desenvolvida por Vladimir Vapnik, Bernhard Boser, Isabelle Guyon e Corrina Cortes, com fundamentos provenientes da Teoria de Aprendizagem Estatística \cite{Evelin2017}.
+\begin{block}{Aplicações de SVM}
+	\begin{itemize}
+	\item Reconhecimento facial; 
+	\item Leitura de placas automotivas; 
+	\item Detecção de spam.
+	\end{itemize}
+\end{block}
 \end{frame}
 
 
-\begin{frame}{Objetivo}
-\begin{itemize}
-	\item Estudar aspectos teóricos-matemáticos dos Métodos de Otimização relacionadas a Aprendizagem de Máquina \cite{Ana1994}, \cite{Solodov2014}, \cite{Izmailov2014}, \cite{Ademir2013}.
-
-	\item Desenvolver um estudo teórico das Máquinas de Vetores Suporte \cite{Faisal2019}, \cite{Evelin2017}.
-
-	\item Realizar uma implementação computacional da técnica de Máquinas de Vetores Suporte utilizando a linguagem de programação  \texttt{Julia}.
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{SVM aplicada ao Problema de Classificação}
-
-Considere um conjunto de dados, pertencentes a duas classes distintas, conforme \Cref{fig1}.
-
-\begin{figure}[!h] 
-	\centering
-	\begin{subfigure}[h]{0.3\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{SVM_linear}
-		\caption{Linear. \label{fig1:a}}
-	\end{subfigure}
-	\begin{subfigure}[!h]{0.3\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{SVM_flexivel}
-		\caption{Flexível. \label{fig1:b}}
-	\end{subfigure}
-	\begin{subfigure}[!h]{0.3\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{SVM_naolinear}
-		\caption{Não Linear. \label{fig1:c}}
-	\end{subfigure}
-	\caption{Dados lineares, com margem flexível e não lineares. \label{fig1}\\ Fonte: \textcite{Evelin2017}}
-\end{figure}
-\end{frame}
-
-
-\begin{frame}{Uma Aplicação Prática}
+\begin{frame}{Aplicação de SVM para Classificação}
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}[h]{0.8\textwidth}
@@ -155,14 +117,39 @@ Considere um conjunto de dados, pertencentes a duas classes distintas, conforme 
 
 
 \begin{frame}
-O problema de classificação trata-se de um problema de programação quadrática convexa com restrições lineares, que pode ser formulado como
+\begin{block}{Formulação do Problema de Classificação}
+Trata-se de um problema de programação quadrática convexa com restrições lineares, que pode ser formulado como
 \[
 \begin{aligned}
 \min_{w,b} & \quad f(w,b) \\
 \text{s.a.} &  \quad g(w,b) \leq 0, \end{aligned}
 \]
 com $w\in \RR^n$ e $b\in \RR $, em que $f: \RR^n \rightarrow \RR$ é uma função quadrática e $g: \RR^{n+1} \rightarrow \RR^m$ é linear.
+\end{block}
+\end{frame}
 
+
+\begin{frame}{SVM Aplicada ao Problema de Classificação}
+
+\begin{figure}[!h] 
+	\centering
+	\begin{subfigure}[h]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SVM_linear}
+		\caption{Linear. \label{fig1:a}}
+	\end{subfigure}
+	\begin{subfigure}[!h]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SVM_flexivel}
+		\caption{Flexível. \label{fig1:b}}
+	\end{subfigure}
+	\begin{subfigure}[!h]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SVM_naolinear}
+		\caption{Não Linear. \label{fig1:c}}
+	\end{subfigure}
+	\caption{Dados lineares, com margem flexível e não lineares. \label{fig1}\\ Fonte: \textcite{Evelin2017}}
+\end{figure}
 \end{frame}
 
 
@@ -279,7 +266,24 @@ onde $w\in \RR^{n}$ e $b\in \RR$.
 \end{frame}
 
 
-\begin{frame}{Projetos Futuros}
+\begin{frame}{Objetivos}
+\begin{itemize}
+	\item Desenvolver um estudo teórico das Máquinas de Vetores Suporte \cite{Faisal2019,Evelin2017};
+
+	\item Estudar os problemas de otimização que surgem do Aprendizado de Máquina~\cite{Ana1994,Ademir2013};
+
+	\item Desenvolver um estudo teórico, do ponto de vista matemático, das Máquinas de Vetores Suporte;
+
+	\item Explorar a linguagem de programação \texttt{Julia} com a implementação de métodos de otimização;
+
+	\item Estudar a técnica de Máquinas de Vetores Suporte aplicada ao problema de classificação; 
+
+	\item Realizar uma implementação computacional da técnica de SVM aplicada a um problema de classificação utilizando \texttt{Julia}.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Metodologia e Resultados Esperados}
 \begin{itemize}
 	\item Estudar as condições de otimalidade para problemas com restrições.
 
@@ -290,7 +294,7 @@ onde $w\in \RR^{n}$ e $b\in \RR$.
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}{Agradecimetos}
 \centering
 \Large{Obrigada pela atenção!}
 \end{frame}
@@ -299,5 +303,6 @@ onde $w\in \RR^{n}$ e $b\in \RR$.
 \begin{frame}
 \printbibliography
 \end{frame}
+
 
 \end{document}
