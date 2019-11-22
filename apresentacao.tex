@@ -23,6 +23,7 @@
 \DeclareMathOperator*{\argmin}{arg\, min}
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\ones}{ones}
+\DeclareMathOperator{\dist}{dist}
 
 \def\Xset{\mathcal{X}}
 \def\Yset{\mathcal{Y}}
@@ -239,51 +240,63 @@ Considere um vetor não nulo $w\in \RR^n$ e um escalar $b\in \RR$. Um hiperplano
 
 \begin{frame}
 \begin{lema} \label{lema1} Suponha que os conjuntos $\Xset^{+}, \Xset^{-} \subset \RR^n$ são finitos e linearmente separáveis, com hiperplano separador $\Hset(w,b)$. Então, existem $\overline{w}\in \RR^n$ e $\overline{b}\in \RR$ tais que $\Hset(w,b)$ pode ser descrito por
-	\[
-	\wbar^{T}x+\bbar =0,
-	\]
-	satisfazendo
-	\begin{align}
-	\wbar^{T}x+\bbar &\geq 1, \text{ para todo } x\in \Xset^{+}, \label{eq1} \\
-	\wbar^{T}x+\bbar &\leq -1, \text{ para todo } x\in \Xset^{-}. \label{eq2}
-	\end{align}
+\[\wbar^{T}x+\bbar =0,\]
+satisfazendo
+\begin{align}
+\wbar^{T}x+\bbar &\geq 1, \text{ para todo } x\in \Xset^{+}, \label{eq1} \\
+\wbar^{T}x+\bbar &\leq -1, \text{ para todo } x\in \Xset^{-}. \label{eq2}
+\end{align}
 \end{lema} 
+
+$\Hset^{+}:=\{x\in \RR^n \mid w^{T}x+b= 1\}$ e $\Hset^{-}:=\{x\in \RR^n \mid w^{T}x+b= -1\}$ são os hiperplanos que definem a faixa que separa os conjuntos $\Xset^{+}$ e $\Xset^{-}$.
 \end{frame}
 
 
-\begin{frame}
-Pelo \Cref{lema1} tem-se que $\Hset^{+}:=\{x\in \RR^n \mid w^{T}x+b= 1\}$ e $\Hset^{-}:=\{x\in \RR^n \mid w^{T}x+b= -1\}$ são os hiperplanos que definem a faixa que separa os conjuntos $\Xset^{+}$ e $\Xset^{-}$.
-
-\begin{prop} \label{prop1} A projeção ortogonal de um vetor $\xbar\in \RR^n$ sobre um hiperplano afim $\Hset(w,b)$, é dada por
-	\[ \proj_{\Hset}(\xbar)= \xbar - \dfrac{w^{T}\xbar+b}{w^{T}w}w. \]
-	Além disso, a $\proj_{\Hset}(\xbar)$ satisfaz a menor distância.
-\end{prop}
-\end{frame}
+%\begin{frame}
+%\begin{prop} \label{prop1} A projeção ortogonal de um vetor $\xbar\in \RR^n$ sobre um hiperplano afim $\Hset(w,b)$, é dada por
+%	\[ \proj_{\Hset}(\xbar)= \xbar - \dfrac{w^{T}\xbar+b}{w^{T}w}w. \]
+%	Além disso, a $\proj_{\Hset}(\xbar)$ satisfaz a menor distância.
+%\end{prop}
+%\end{frame}
 
 
-\begin{frame}
-O \Cref{lema2} estabelece a largura da faixa entre os hiperplanos separadores $\Hset^{+}$ e $\Hset^{-}$.
+\begin{frame}{Distância entre os Hiperplanos $\Hset^{+}$ e $\Hset^{-}$}
 
 \begin{lema}\label{lema2} A distância entre os hiperplanos $\Hset^{+}$ e $\Hset^{-}$ é dada por $d=\dfrac{2}{\Vert w\Vert}.$
 \end{lema}
+Encontrar o hiperplano ótimo implica maximizar $\dist(\Hset^{+} , \Hset^{-}) =\dfrac{2}{\Vert w\Vert }$, o que equivale a minimizar $\dfrac{1}{2}\Vert w\Vert^{2}$.
+
 \end{frame}
 
 
 \begin{frame}
-Para encontrar o hiperplano que melhor separa os dados é preciso maximizar $d=\dfrac{2}{\Vert w\Vert }$, ou equivalentemente, minimizar $\dfrac{1}{2}\Vert w\Vert^{2}$. 
+\begin{block}{Demonstração da equivalência}
+De fato, seja $w^{*}=\argmax\dfrac{2}{\Vert w\Vert}$. Então, para todo $w\in \RR^n$,
+\[ \dfrac{2}{\Vert w^{*}\Vert} \geq \dfrac{2}{\Vert w\Vert} \Rightarrow \Vert w\Vert \geq \Vert w^{*}\Vert \Rightarrow \Vert w\Vert^{2} \geq \Vert w^{*}\Vert^{2} \Rightarrow \dfrac{1}{2}\Vert w\Vert^{2} \geq \dfrac{1}{2}\Vert w^{*}\Vert^{2}, \]
+o que é verdade, pois $\Vert \cdot \Vert$ é não negativa. 
 
+Portanto,
+\[ \argmax\dfrac{2}{\Vert w\Vert} = \argmin\dfrac{1}{2}\Vert w\Vert^2. \]
+\end{block}
+\end{frame}
+
+
+\begin{frame} 
+\begin{block}{Restrições}
 Como a faixa deve separar os dados das duas classes, as seguintes restrições devem ser satisfeitas
 \begin{align}
 w^{T}x+b &\geq 1 , \text{ para  todo } x\in \Xset^{+}, \\
 w^{T}x+b &\leq -1 , \text{ para  todo } x\in \Xset^{-}.
 \end{align}
 
-Reescrevendo as restrições acima de uma forma mais compacta temos
+Ou de uma forma mais compacta, temos
 \[ y_{i}(w^{T}x^{i}+b)\geq 1, \quad i=1, \ldots ,m. \]
+\end{block}
 \end{frame}
 
 
 \begin{frame}
+\begin{block}{Formulação do Problema}
 Portanto, o problema de encontrar o hiperplano ótimo pode ser formulado da seguinte maneira
 \[ \label{eq5}
 \begin{aligned}
@@ -291,12 +304,13 @@ Portanto, o problema de encontrar o hiperplano ótimo pode ser formulado da segu
 \text{s.a.} &  \quad y_i(w^{T}x^{i}+b) \geq 1, \quad i=1, \ldots , m, \end{aligned}
 \]
 onde $w\in \RR^{n}$ e $b\in \RR$. 
+\end{block}
 \end{frame}
 
 
 \begin{frame}{Objetivos}
 \begin{itemize}
-	\item Desenvolver um estudo teórico das Máquinas de Vetores Suporte \cite{Faisal2019,Evelin2017};
+	\item Desenvolver um estudo teórico das Máquinas de Vetores Suporte~\cite{Faisal2019,Evelin2017};
 
 	\item Estudar os problemas de otimização que surgem do Aprendizado de Máquina~\cite{Ana1994,Ademir2013};
 
@@ -313,22 +327,20 @@ onde $w\in \RR^{n}$ e $b\in \RR$.
 
 \begin{frame}{Metodologia e Resultados Esperados}
 \begin{itemize}
-	\item Estudar as condições de otimalidade para problemas com restrições.
+	\item Estudar os aspectos teórico-matemáticos dos métodos de otimização relacionados com a Aprendizagem de Máquina, em particular relacionados à técnica de Máquinas de Vetores Suporte;
 
-	\item Estudar a teoria de dualidade, em particular a relacionada ao problema de programação quadrática.
-
-	\item Realizar uma implementação computacional da técnica de Máquinas de Vetores Suporte a um problema de classificação utilizando a linguagem de programação \texttt{Julia}.
+	\item Realizar uma implementação computacional dos métodos de otimização e testes em bibliotecas de problemas de Aprendizagem de Máquina.
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}{Agradecimetos}
 \centering
-\Large{Obrigada pela atenção!}
+\Large{\textbf{Obrigada pela atenção!}}
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}{Referências da Apresentação}
 \printbibliography
 \end{frame}
 
