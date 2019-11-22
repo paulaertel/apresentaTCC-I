@@ -153,27 +153,35 @@ com $w\in \RR^n$ e $b\in \RR $, em que $f: \RR^n \rightarrow \RR$ é uma funçã
 \end{frame}
 
 
-\begin{frame}{Formulação Matemática do Problema de Classificação}
-Considere os conjuntos de entrada $\Xset =\{x^1, \ldots , x^m \} \subset \RR^n$ e de treinamento $\Yset=\{(x^1, y_1), \ldots , (x^m, y_m)\mid x^i \in \Xset \, e \, y_i \in \{-1,1\}\}$, com a partição 
+\begin{frame}
+\begin{block}{Formulação Matemática do Problema de Classificação}
+Considere os conjuntos de entrada 
+\[\Xset =\{x^1, \ldots , x^m \} \subset \RR^n \] 
+e de treinamento 
+\[\Yset=\{(x^1, y_1), \ldots , (x^m, y_m)\mid x^i \in \Xset \, e \, y_i \in \{-1,1\}\}, \]
+com a partição 
 \[ \label{conj1}
 \Xset ^{+} =\{x^i \in \Xset\mid y_i=1\} \quad e \quad \Xset^{-}=\{x^i \in \Xset\mid y_i=-1\},
 \]
 dos conjuntos formados pelos atributos pertencentes às classes positiva e negativa, respectivamente.
-
-\begin{defi} Considere um vetor não nulo $w\in \RR^n$ e um escalar $b\in \RR$. Um hiperplano com vetor normal $w$ e constante $b$ é um conjunto da forma $\Hset(w,b)=\{x\in \RR^n \mid w^{T}x+b=0\}$.
-\end{defi}
+\end{block}
 \end{frame}
 
 
 \begin{frame}
+
+\begin{defi} 
+Considere um vetor não nulo $w\in \RR^n$ e um escalar $b\in \RR$. Um hiperplano com vetor normal $w$ e constante $b$ é um conjunto da forma $\Hset(w,b)=\{x\in \RR^n \mid w^{T}x+b=0\}$.
+\end{defi}
+
 \begin{figure}[h] 
 	\centering
-	\begin{subfigure}[h]{0.4\textwidth}
+	\begin{subfigure}[h]{0.36\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{dados_treinamento}
 		\caption{Dados de treinamento. \label{fig2:a}}
 	\end{subfigure}
-	\begin{subfigure}[h]{0.38\textwidth}
+	\begin{subfigure}[h]{0.34\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{hiperplanos_separadores}
 		\caption{Hiperplanos separadores. \label{fig2:b}}
@@ -184,7 +192,7 @@ dos conjuntos formados pelos atributos pertencentes às classes positiva e negat
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}{Hiperplano Ótimo}
 \begin{figure}[h] 
 	\centering
 	\begin{subfigure}[h]{0.4\textwidth}
@@ -206,6 +214,26 @@ dos conjuntos formados pelos atributos pertencentes às classes positiva e negat
 \begin{frame}{Conjuntos Linearmente Separáveis}
 \begin{defi} \label{def1} Os conjuntos $\Xset^{+}, \Xset^{-} \subset \RR^n$ são ditos linearmente separáveis quando existem $w\in \RR^n$ e $b\in \RR$  tais que $w^{T}x+b>0$ para todo $x\in \Xset^{+}$ e $w^{T}x+b<0$ para todo $x\in \Xset^{-}$. O hiperplano $\Hset(w,b)$ é chamado hiperplano separador dos conjuntos $\Xset^{+}$ e $\Xset^{-}$.
 \end{defi}
+
+\begin{figure}[!h] 
+	\centering
+	\begin{subfigure}[h]{0.25\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SVM_linear}
+		\caption{Linear. \label{fig1:a}}
+	\end{subfigure}
+	\begin{subfigure}[!h]{0.25\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SVM_flexivel}
+		\caption{Flexível. \label{fig1:b}}
+	\end{subfigure}
+	\begin{subfigure}[!h]{0.25\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SVM_naolinear}
+		\caption{Não Linear. \label{fig1:c}}
+	\end{subfigure}
+	\caption{Dados lineares, com margem flexível e não lineares. \label{fig1}\\ Fonte: \textcite{Evelin2017}}
+\end{figure}
 \end{frame}
 
 
