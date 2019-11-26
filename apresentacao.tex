@@ -83,10 +83,16 @@ A \textbf{Aprendizagem de Máquina} (do inglês \textit{Machine Learning}) é o 
 \end{frame}
 
 
-\begin{frame}{Máquinas de Vetores Suporte}
-As \textbf{Máquinas de Vetores Suporte} (SVM, do inglês \textit{Support Vector Machine}) são uma técnica para aprendizagem supervisionada.
+\begin{frame}{Máquinas de Vetores Suporte (SVM)}
+ As \textbf{Máquinas de Vetores Suporte} (SVM, do inglês \textit{Support Vector Machine}) são uma técnica para aprendizagem supervisionada.
+ \begin{itemize}
+	%\item
 
-Essa técnica foi desenvolvida por Vladimir Vapnik, Bernhard Boser, Isabelle Guyon e Corrina Cortes, com fundamentos provenientes da Teoria de Aprendizagem Estatística \cite{Evelin2017}.
+	\item Essa técnica foi desenvolvida com base na Teoria de Aprendizagem Estatística \cite{Evelin2017} . 
+
+	\item Casos em que as SVM são indicadas.
+	%\item Essa técnica foi desenvolvida por Vladimir Vapnik, Bernhard Boser, Isabelle Guyon e Corrina Cortes, com fundamentos provenientes da Teoria de Aprendizagem Estatística \cite{Evelin2017}.
+\end{itemize}
 \begin{block}{Aplicações de SVM}
 	\begin{itemize}
 	\item Reconhecimento facial; 
@@ -117,15 +123,19 @@ Essa técnica foi desenvolvida por Vladimir Vapnik, Bernhard Boser, Isabelle Guy
 \end{frame}
 
 
-\begin{frame}
-\begin{block}{Formulação do Problema de Classificação}
-Trata-se de um problema de programação quadrática convexa com restrições lineares, que pode ser formulado como
+\begin{frame}{Problema de Classificação: Formulação}
+\begin{block}{}
+\begin{itemize}
+	\item O problema de classificação trata-se de um problema de programação quadrática convexa com restrições lineares.
+
+	\item Ele pode ser formulado como
 \[
 \begin{aligned}
-\min_{w,b} & \quad f(w,b) \\
+\min_{w,b} & \quad f(w) \\
 \text{s.a.} &  \quad g(w,b) \leq 0, \end{aligned}
 \]
-com $w\in \RR^n$ e $b\in \RR $, em que $f: \RR^n \rightarrow \RR$ é uma função quadrática e $g: \RR^{n+1} \rightarrow \RR^m$ é linear.
+com $w\in \RR^n$ e $b\in \RR $, em que $f: \RR^{n} \rightarrow \RR$ é uma função quadrática e $g: \RR^{n+1} \rightarrow \RR^m$ é linear.
+\end{itemize}
 \end{block}
 \end{frame}
 
@@ -154,13 +164,14 @@ com $w\in \RR^n$ e $b\in \RR $, em que $f: \RR^n \rightarrow \RR$ é uma funçã
 \end{frame}
 
 
-\begin{frame}
-\begin{block}{Formulação Matemática do Problema de Classificação}
+\begin{frame}{Problema de Classificação: Formulação Matemática}
+\begin{block}{}
 Considere os conjuntos de entrada 
 \[\Xset =\{x^1, \ldots , x^m \} \subset \RR^n \] 
 e de treinamento 
-\[\Yset=\{(x^1, y_1), \ldots , (x^m, y_m)\mid x^i \in \Xset \, e \, y_i \in \{-1,1\}\}, \]
-com a partição 
+\[\Yset=\{(x^1, y_1), \ldots , (x^m, y_m)\mid x^i \in \Xset \, e \, y_i \in \{-1,1\}\}  \subset \RR^{n+1},\]
+
+com a partição de $\Xset$
 \[ \label{conj1}
 \Xset ^{+} =\{x^i \in \Xset\mid y_i=1\} \quad e \quad \Xset^{-}=\{x^i \in \Xset\mid y_i=-1\},
 \]
@@ -174,7 +185,7 @@ dos conjuntos formados pelos atributos pertencentes às classes positiva e negat
 \begin{defi} 
 Considere um vetor não nulo $w\in \RR^n$ e um escalar $b\in \RR$. Um hiperplano com vetor normal $w$ e constante $b$ é um conjunto da forma $\Hset(w,b)=\{x\in \RR^n \mid w^{T}x+b=0\}$.
 \end{defi}
-
+\pause
 \begin{figure}[h] 
 	\centering
 	\begin{subfigure}[h]{0.36\textwidth}
@@ -193,7 +204,7 @@ Considere um vetor não nulo $w\in \RR^n$ e um escalar $b\in \RR$. Um hiperplano
 \end{frame}
 
 
-\begin{frame}{Hiperplano Ótimo}
+\begin{frame}{Problema de Classificação: Hiperplano Ótimo}
 \begin{figure}[h] 
 	\centering
 	\begin{subfigure}[h]{0.4\textwidth}
@@ -212,23 +223,23 @@ Considere um vetor não nulo $w\in \RR^n$ e um escalar $b\in \RR$. Um hiperplano
 \end{frame}
 
 
-\begin{frame}{Conjuntos Linearmente Separáveis}
+\begin{frame}{Problema de Classificação: Conjuntos Linearmente Separáveis}
 \begin{defi} \label{def1} Os conjuntos $\Xset^{+}, \Xset^{-} \subset \RR^n$ são ditos linearmente separáveis quando existem $w\in \RR^n$ e $b\in \RR$  tais que $w^{T}x+b>0$ para todo $x\in \Xset^{+}$ e $w^{T}x+b<0$ para todo $x\in \Xset^{-}$. O hiperplano $\Hset(w,b)$ é chamado hiperplano separador dos conjuntos $\Xset^{+}$ e $\Xset^{-}$.
 \end{defi}
 
 \begin{figure}[!h] 
 	\centering
-	\begin{subfigure}[h]{0.25\textwidth}
+	\begin{subfigure}[h]{0.20\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{SVM_linear}
 		\caption{Linear. \label{fig1:a}}
 	\end{subfigure}
-	\begin{subfigure}[!h]{0.25\textwidth}
+	\begin{subfigure}[!h]{0.20\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{SVM_flexivel}
 		\caption{Flexível. \label{fig1:b}}
 	\end{subfigure}
-	\begin{subfigure}[!h]{0.25\textwidth}
+	\begin{subfigure}[!h]{0.20\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{SVM_naolinear}
 		\caption{Não Linear. \label{fig1:c}}
@@ -238,7 +249,7 @@ Considere um vetor não nulo $w\in \RR^n$ e um escalar $b\in \RR$. Um hiperplano
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}{Problema de Classificação: Determinação da faixa que separa os dados}
 \begin{lema} \label{lema1} Suponha que os conjuntos $\Xset^{+}, \Xset^{-} \subset \RR^n$ são finitos e linearmente separáveis, com hiperplano separador $\Hset(w,b)$. Então, existem $\overline{w}\in \RR^n$ e $\overline{b}\in \RR$ tais que $\Hset(w,b)$ pode ser descrito por
 \[\wbar^{T}x+\bbar =0,\]
 satisfazendo
@@ -247,8 +258,12 @@ satisfazendo
 \wbar^{T}x+\bbar &\leq -1, \text{ para todo } x\in \Xset^{-}. \label{eq2}
 \end{align}
 \end{lema} 
+\pause
+\begin{itemize}
+	\item $\Hset^{+}:=\{x\in \RR^n \mid w^{T}x+b= 1\}$ e $\Hset^{-}:=\{x\in \RR^n \mid w^{T}x+b= -1\}$ .
 
-$\Hset^{+}:=\{x\in \RR^n \mid w^{T}x+b= 1\}$ e $\Hset^{-}:=\{x\in \RR^n \mid w^{T}x+b= -1\}$ são os hiperplanos que definem a faixa que separa os conjuntos $\Xset^{+}$ e $\Xset^{-}$.
+	\item Classificamos um novo dado $\hat{x}$ utilizando \eqref{eq1}.
+\end{itemize}
 \end{frame}
 
 
@@ -260,28 +275,41 @@ $\Hset^{+}:=\{x\in \RR^n \mid w^{T}x+b= 1\}$ e $\Hset^{-}:=\{x\in \RR^n \mid w^{
 %\end{frame}
 
 
-\begin{frame}{Distância entre os Hiperplanos $\Hset^{+}$ e $\Hset^{-}$}
+\begin{frame}{Problema de Classificação: Distância entre os Hiperplanos $\Hset^{+}$ e $\Hset^{-}$}
 
-\begin{lema}\label{lema2} A distância entre os hiperplanos $\Hset^{+}$ e $\Hset^{-}$ é dada por $d=\dfrac{2}{\Vert w\Vert}.$
+\begin{lema}\label{lema2} A distância entre os hiperplanos $\Hset^{+}$ e $\Hset^{-}$ é dada por \[\dist(\Hset^{+} , \Hset^{-})=\dfrac{2}{\Vert w\Vert}.\]
 \end{lema}
-Encontrar o hiperplano ótimo implica maximizar $\dist(\Hset^{+} , \Hset^{-}) =\dfrac{2}{\Vert w\Vert }$, o que equivale a minimizar $\dfrac{1}{2}\Vert w\Vert^{2}$.
 
+\begin{figure}[!h] 
+	\centering
+	\includegraphics[width=0.40\textwidth]{distancia_hiperplanos}
+	\caption{Distância entre hiperplanos. \\ Fonte: \textcite{Faisal2019}}
+\end{figure}
 \end{frame}
 
 
-\begin{frame}
-\begin{block}{Demonstração da equivalência}
-De fato, seja $w^{*}=\argmax\dfrac{2}{\Vert w\Vert}$. Então, para todo $w\in \RR^n$,
-\[ \dfrac{2}{\Vert w^{*}\Vert} \geq \dfrac{2}{\Vert w\Vert} \Rightarrow \Vert w\Vert \geq \Vert w^{*}\Vert \Rightarrow \Vert w\Vert^{2} \geq \Vert w^{*}\Vert^{2} \Rightarrow \dfrac{1}{2}\Vert w\Vert^{2} \geq \dfrac{1}{2}\Vert w^{*}\Vert^{2}, \]
-o que é verdade, pois $\Vert \cdot \Vert$ é não negativa. 
-
-Portanto,
-\[ \argmax\dfrac{2}{\Vert w\Vert} = \argmin\dfrac{1}{2}\Vert w\Vert^2. \]
+\begin{frame}{Problema de Classificação: Formulação Matemática}
+\begin{block}{}
+Encontrar o hiperplano ótimo implica 
+\[ \max \dfrac{2}{\Vert w\Vert}  \Longleftrightarrow \min \dfrac{1}{2}\Vert w\Vert^{2}. \]
 \end{block}
+\pause
+\begin{exampleblock}{Esboço da Demonstração}
+\begin{enumerate}
+
+	\item Seja $w^{*}:=\argmax\dfrac{2}{\Vert w\Vert}$. 
+
+	\item Então, para todo $w\in \RR^n$,
+\[ \dfrac{2}{\Vert w^{*}\Vert} \geq \dfrac{2}{\Vert w\Vert} \Rightarrow \Vert w\Vert \geq \Vert w^{*}\Vert \Rightarrow \Vert w\Vert^{2} \geq \Vert w^{*}\Vert^{2} \Rightarrow \dfrac{1}{2}\Vert w\Vert^{2} \geq \dfrac{1}{2}\Vert w^{*}\Vert^{2}. \]
+
+	\item Portanto,
+\[ \argmax\dfrac{2}{\Vert w\Vert} = \argmin\dfrac{1}{2}\Vert w\Vert^2. \]
+\end{enumerate}
+\end{exampleblock}
 \end{frame}
 
 
-\begin{frame} 
+\begin{frame}{Problema de Classificação: Formulação Matemática}
 \begin{block}{Restrições}
 Como a faixa deve separar os dados das duas classes, as seguintes restrições devem ser satisfeitas
 \begin{align}
@@ -295,8 +323,8 @@ Ou de uma forma mais compacta, temos
 \end{frame}
 
 
-\begin{frame}
-\begin{block}{Formulação do Problema}
+\begin{frame}{Problema de Classificação: Formulação Matemática}
+\begin{block}{O Problema de Classificação pela SVM}
 Portanto, o problema de encontrar o hiperplano ótimo pode ser formulado da seguinte maneira
 \[ \label{eq5}
 \begin{aligned}
@@ -308,35 +336,44 @@ onde $w\in \RR^{n}$ e $b\in \RR$.
 \end{frame}
 
 
-\begin{frame}{Objetivos}
+\begin{frame}{Objetivos Gerais}
+\begin{block}{}
 \begin{itemize}
-	\item Desenvolver um estudo teórico das Máquinas de Vetores Suporte~\cite{Faisal2019,Evelin2017};
+	\item Resumir a teoria de otimização com e sem restrições.
 
 	\item Estudar os problemas de otimização que surgem do Aprendizado de Máquina~\cite{Ana1994,Ademir2013};
 
-	\item Desenvolver um estudo teórico, do ponto de vista matemático, das Máquinas de Vetores Suporte;
-
-	\item Explorar a linguagem de programação \texttt{Julia} com a implementação de métodos de otimização;
+	\item Desenvolver um estudo teórico, do ponto de vista matemático, das Máquinas de Vetores Suporte~\cite{Faisal2019,Evelin2017};
 
 	\item Estudar a técnica de Máquinas de Vetores Suporte aplicada ao problema de classificação; 
 
-	\item Realizar uma implementação computacional da técnica de SVM aplicada a um problema de classificação utilizando \texttt{Julia}.
+	\item Explorar a linguagem de programação \texttt{Julia} com a implementação de métodos de otimização;
+
+	\item Realizar uma implementação computacional da técnica de SVM aplicada a um problema de classificação utilizando \texttt{Julia}~\cite{Bezanson:2017g}.
 \end{itemize}
+\end{block}
 \end{frame}
 
 
-\begin{frame}{Metodologia e Resultados Esperados}
-\begin{itemize}
-	\item Estudar os aspectos teórico-matemáticos dos métodos de otimização relacionados com a Aprendizagem de Máquina, em particular relacionados à técnica de Máquinas de Vetores Suporte;
+%\begin{frame}{Metodologia e Resultados Esperados}
+%\begin{itemize}
+%	\item Estudar os aspectos teórico-matemáticos dos métodos de otimização relacionados com a Aprendizagem de Máquina, em particular relacionados à técnica de Máquinas de Vetores Suporte;
+%
+%	\item Realizar uma implementação computacional dos métodos de otimização e testes em bibliotecas de problemas de Aprendizagem de Máquina.
+%\end{itemize}
+%\end{frame}
 
-	\item Realizar uma implementação computacional dos métodos de otimização e testes em bibliotecas de problemas de Aprendizagem de Máquina.
-\end{itemize}
-\end{frame}
 
+\begin{frame}{Agradecimento}
 
-\begin{frame}{Agradecimetos}
+\begin{block}{}
+
 \centering
 \Large{\textbf{Obrigada pela atenção!}}
+$$$$
+{\normalsize E-mail: paulacristina\_ertel@hotmail.com }
+
+\end{block}
 \end{frame}
 
 
